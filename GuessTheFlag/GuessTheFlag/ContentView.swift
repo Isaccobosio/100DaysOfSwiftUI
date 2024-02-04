@@ -17,7 +17,7 @@ struct ContentView: View {
     @State private var givenAnswers = 0
     @State private var showingResetAlert = false
     
-    let MAX_ANSWERS = 8
+    let MAX_ANSWERS = 4
     
     var body: some View {
         ZStack {
@@ -73,12 +73,12 @@ struct ContentView: View {
         .alert(scoreTitle, isPresented: $showingScore) {
             Button("Continue", action: askQuestion)
         } message: {
-            Text("Your score is: \(score)")
+            Text("Your score is: \(score). You have \(MAX_ANSWERS - givenAnswers) more attempt\(MAX_ANSWERS - givenAnswers > 1 ? "s" : "").")
         }
         .alert("Try again!", isPresented: $showingResetAlert) {
             Button("Reset game", action: resetGame)
         } message: {
-            Text("Nice try. Your final score is: \(score)")
+            Text("Nice try. Your final score is: \(score).")
         }
     }
     
