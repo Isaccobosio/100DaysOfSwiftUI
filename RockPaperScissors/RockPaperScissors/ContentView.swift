@@ -12,6 +12,8 @@ struct ButtonModifier: ViewModifier {
         content
             .buttonStyle(.borderedProminent)
             .controlSize(.large)
+            .font(.title)
+            .tint(.orange)
     }
 }
 
@@ -27,25 +29,26 @@ struct ContentView: View {
     var body: some View {
         VStack {
             Text("Score \(score)")
-                .font(.headline)
+                .font(.headline.bold())
             
             Spacer()
             
-            VStack(spacing: 10) {
+            VStack(spacing: 16) {
                 Text("App picked \(choicesAsEmoji[appPick])")
                     .font(.largeTitle.bold())
                     .multilineTextAlignment(.center)
-                
-                Text("Beat the app")
-                    .font(.title)
-                    .fontWeight(.medium)
-                    .multilineTextAlignment(.center)
-                
-                Text("\(userShouldWin ? "winning" : "losing") this round")
-                    .font(.title)
-                    .fontWeight(.medium)
-                    .multilineTextAlignment(.center)
-                    .foregroundColor(userShouldWin ? .green : .red)
+                VStack {
+                    Text("Beat the app")
+                        .font(.title)
+                        .fontWeight(.medium)
+                        .multilineTextAlignment(.center)
+                    
+                    Text("\(userShouldWin ? "winning" : "losing") this round")
+                        .font(.title)
+                        .fontWeight(.medium)
+                        .multilineTextAlignment(.center)
+                        .foregroundColor(userShouldWin ? .green : .red)
+                }
             }
             
             Spacer()
@@ -59,7 +62,6 @@ struct ContentView: View {
                                 .frame(maxWidth: .infinity)
                     }
                     .modifier(ButtonModifier())
-                    .disabled(choice == choices[appPick])
                 }
             }
             .padding()
